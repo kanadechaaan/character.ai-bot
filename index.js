@@ -90,8 +90,11 @@ client.on("messageCreate", async message => {
     const character = await characterAI.fetchCharacter(client.activeCharacter); // Get character by charID
 
     const dm = await character.DM(); // Get the main conversation of the character
-    const aiReponse = await dm.sendMessage(msgText);
-    return message.reply(aiReponse.content)
+
+    // Adds [@Username]: infront of the message and sends it to the AI. (replace this with msgText if you don't want this)
+    const aiReponse = await dm.sendMessage(`[@${message.author.username}]:` + msgText); 
+
+    return message.reply(aiReponse.content) // Send back the response in the discord channel
 });
 
 // Interaction command handling
