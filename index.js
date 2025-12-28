@@ -112,3 +112,14 @@ client.on("interactionCreate", async interaction => {
 })
 
 client.login(config.token) // connects the bot.
+
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;  // KoyebがPORT変数指定するからこれ必須
+
+app.get('/', (req, res) => res.send('Bot is alive!'));
+app.get('/health', (req, res) => res.status(200).send('OK'));  // 200 OK返す
+
+app.listen(PORT, '0.0.0.0', () => {  // '0.0.0.0' が超大事！ localhostじゃ外部から繋がらない
+  console.log(`Health server listening on port ${PORT}`);
+});
